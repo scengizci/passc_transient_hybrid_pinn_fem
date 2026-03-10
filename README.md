@@ -64,6 +64,32 @@ cd passc_transient_hybrid_pinn_fem
 pip install -r requirements.txt
 ```
 
+## Alternative Installation
+
+In case there are conflicts (particularly with the `sympy` dependency and if you need to use an older CUDA version for `torch`, for instance for `cuda 12.6`), then it is best to create a python virtual environment:
+
+```bash
+micromamba create -n fenicsproject_with_cuda -c conda-forge python=3.10
+```
+in which you should be able to change `micromamba` with your preferred package manager, possibly `conda`. As the FEniCS Legacy version requires python version 3.10.*, we let the virtual environment use 3.10.
+
+Then, you can:
+```bash
+micromamba activate fenicsproject_with_cuda
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu126
+```
+in order to install the `torch` version you might need: 
+see [Start Locally](https://pytorch.org/get-started/locally/) on PyTorch's website.
+
+Finally,
+```bash
+git clone https://github.com/bear-polar/passc_transient_hybrid_pinn_fem.gi
+cd passc_transient_hybrid_pinn_fem
+# install fenics and the repo dependencies
+micromamba install fenics -c conda-forge
+micromamba install matplotlib scipy
+```
+
 ---
 
 ## Running the Examples
@@ -71,10 +97,12 @@ pip install -r requirements.txt
 Each solver script is fully self-contained. To run Example 1 (1D boundary layer):
 
 ```bash
-python solver_one_lwc.py
+mkdir -p results
+cd results
+python ../solver_one_lwc.py
 ```
 
-To run Example 3 (traveling wave):
+Or, directly, to run Example 3 (traveling wave):
 
 ```bash
 python solver_four_hybrid_lwc.py

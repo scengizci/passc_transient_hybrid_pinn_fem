@@ -205,3 +205,10 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+
+# Local Outputs & Compressed Files
+.gitignore
+one_lwc*
+two_lwc*
+three_hybrid_lwc*
